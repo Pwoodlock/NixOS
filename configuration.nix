@@ -120,6 +120,7 @@
     zsh
     appimage-run
     python313Full
+    usbutils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
