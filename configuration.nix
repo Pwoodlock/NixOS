@@ -16,7 +16,7 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -119,14 +119,7 @@
     pkgs.netbird
     pkgs.netbird-ui
     zsh
-    appimage-run
-    python313Full
-    usbutils
-    vscode
-    platformio
-    esptool
-    esptool-ck
-    
+
 
     
   ];
