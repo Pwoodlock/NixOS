@@ -159,7 +159,7 @@
   programs.thunderbird.enable = true;
   services.netbird.enable = true;
   programs.appimage.enable = true;
-  programs.vscode.enabe = true;
+  #programs.vscode.enabe = true;
   
 
 
