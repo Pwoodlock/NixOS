@@ -1,142 +1,122 @@
 { config, pkgs, ... }:
 
-
-####################################################
-#
-# Section for setting up variables
-#
-
-
 let
   myAliases = {
-  ll = "ls -l";
-  ".." = "cd ..";
+    ll = "ls -l";
+    ".." = "cd ..";
   };
-
 in
 
-#####################################################
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "nixos-lenovo";
   home.homeDirectory = "/home/nixos-lenovo";
   nixpkgs.config.allowUnfree = true;
+  home.stateVersion = "24.05";
 
-
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+  # Packages
   home.packages = [
-
-    #pkgs.vscode
     pkgs.oh-my-posh
-    #pkgs.whatsapp-for-linux
-    #pkgs.freecad-wayland
     pkgs.waveterm
-    #pkgs.k9s
-    #pkgs.kubectl
-    #pkgs.kubernetes-helm
-    #pkgs.powershell
     pkgs.microsoft-edge
     pkgs.ungoogled-chromium
     pkgs.lutris
-    #pkgs.yazi
     pkgs.nextcloud-client
-
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    pkgs.nushell
+    pkgs.starship
+    pkgs.carapace
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
+  # Dotfiles
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+    # Place for managing dotfiles if needed
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/nixos-dd/etc/profile.d/hm-session-vars.sh
-  #
+  # Environment Variables
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
 
-
-
-  # **** Terminal Related
-  # The below is to enable the type of Bash and Aliases to the home-manager directory.  
-  programs.bash = {
-    enable = true;
-    shellAliases = myAliases;
-
-  };
-
-  programs.zsh = {
-    enable = true;
-    shellAliases = myAliases;
-
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "PWoodlock";
-    userEmail = "patrick@devsec.ie";
-    extraConfig = {
-      init.defaultBranch = "main";
+  # Programs
+  programs = {
+    nushell = {
+      enable = true;
+      configFile.source = "${__curSystemConfig}/config.nu";
+      extraConfig = ''
+        let carapace_completer = {|spans|
+          carapace $spans.0 nushell $spans | from json
+        }
+        $env.config = {
+          show_banner: false,
+          completions: {
+            case_sensitive: false
+            quick: true
+            partial: true
+            algorithm: "fuzzy"
+            external: {
+              enable: true
+              max_results: 100
+              completer: $carapace_completer
+            }
+          }
+        }
+        $env.PATH = ($env.PATH | split row (char esep) | prepend /home/myuser/.apps | append /usr/bin/env)
+      '';
+      shellAliases = {
+        vi = "hx";
+        vim = "hx";
+        nano = "hx";
+      };
     };
 
-  #******** Services & Programs Section
-  #programs.vscode.enable = true;
-  programs.yazi.enable = true;
-  programs.oh-my-posh.enable = true;
-  programs.oh-my-posh.enableZshIntegration = true;
-  programs.oh-my-posh.enableBashIntegration = true;
-  services.nextcloud-client.startInBackground = true;
-  services.nextcloud-client.enable = true;
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
 
+    starship = {
+      enable = true;
+      settings = {
+        add_newline = true;
+        character = {
+          success_symbol = "[➜](bold green)";
+          error_symbol = "[➜](bold red)";
+        };
+      };
+    };
 
-  # Let Home Manager install and manage itself.
+    bash = {
+      enable = true;
+      shellAliases = myAliases;
+    };
+
+    zsh = {
+      enable = true;
+      shellAliases = myAliases;
+    };
+
+    git = {
+      enable = true;
+      userName = "PWoodlock";
+      userEmail = "patrick@devsec.ie";
+      extraConfig = {
+        init.defaultBranch = "main";
+      };
+    };
+
+    yazi = { enable = true; };
+    oh-my-posh = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
+  };
+
+  # Services
+  services.nextcloud-client = {
+    startInBackground = true;
+    enable = true;
+  };
+
+  # Enable Home Manager
   programs.home-manager.enable = true;
 }
