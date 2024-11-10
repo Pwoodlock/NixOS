@@ -121,6 +121,10 @@
     appimage-run
     python313Full
     usbutils
+    vscode
+    platformio
+    esptool
+    
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -155,6 +159,9 @@
   programs.thunderbird.enable = true;
   services.netbird.enable = true;
   programs.appimage.enable = true;
+  programs.vscode.enabe = true;
+  
+
 
   #**** Environment Shells 
   environment.shells = with pkgs; [ zsh ];

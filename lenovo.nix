@@ -38,19 +38,19 @@ in
   # environment.
   home.packages = [
 
-    pkgs.vscode
+    #pkgs.vscode
     pkgs.oh-my-posh
-    pkgs.whatsapp-for-linux
-    pkgs.freecad-wayland
+    #pkgs.whatsapp-for-linux
+    #pkgs.freecad-wayland
     pkgs.waveterm
-    pkgs.k9s
-    pkgs.kubectl
-    pkgs.kubernetes-helm
-    pkgs.powershell
+    #pkgs.k9s
+    #pkgs.kubectl
+    #pkgs.kubernetes-helm
+    #pkgs.powershell
     pkgs.microsoft-edge
     pkgs.ungoogled-chromium
     pkgs.lutris
-    pkgs.yazi
+    #pkgs.yazi
     pkgs.nextcloud-client
 
 
@@ -129,7 +129,7 @@ in
   };
 
   #******** Services & Programs Section
-  programs.vscode.enable = true;
+  #programs.vscode.enable = true;
   programs.yazi.enable = true;
   programs.oh-my-posh.enable = true;
   programs.oh-my-posh.enableZshIntegration = true;
