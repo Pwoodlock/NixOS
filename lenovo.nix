@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  # Define custom shell aliases for convenience
   myAliases = {
     ll = "ls -l";
     ".." = "cd ..";
@@ -8,12 +9,13 @@ let
 in
 
 {
+  # Set basic user and system configuration
   home.username = "nixos-lenovo";
   home.homeDirectory = "/home/nixos-lenovo";
   nixpkgs.config.allowUnfree = true;
   home.stateVersion = "24.05";
 
-  # Packages
+  # Define packages to be installed in the user environment
   home.packages = [
     pkgs.oh-my-posh
     pkgs.waveterm
@@ -25,102 +27,105 @@ in
     pkgs.starship
     pkgs.carapace
     pkgs.vscode
-
-
   ];
 
-  # Dotfiles
+  # Manage dotfiles
   home.file = {
-    # Place for managing dotfiles if needed
+    # Link the Nushell configuration file
+    ".config/nushell/config.nu".source = ./config.nu;
   };
 
-  # Environment Variables
+  # Set session-wide environment variables (customize if needed)
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
 
-  # Programs
-#   programs = {
-#     nushell = {
-#       enable = true;
-#       configFile.source = "${__curSystemConfig}/config.nu";
-#       extraConfig = ''
-#         let carapace_completer = {|spans|
-#           carapace $spans.0 nushell $spans | from json
-#         }
-#         $env.config = {
-#           show_banner: false,
-#           completions: {
-#             case_sensitive: false
-#             quick: true
-#             partial: true
-#             algorithm: "fuzzy"
-#             external: {
-#               enable: true
-#               max_results: 100
-#               completer: $carapace_completer
-#             }
-#           }
-#         }
-#         $env.PATH = ($env.PATH | split row (char esep) | prepend /home/myuser/.apps | append /usr/bin/env)
-#       '';
-#       shellAliases = {
-#         vi = "hx";
-#         vim = "hx";
-#         nano = "hx";
-#       };
-#     };
+  # Configure shell programs and related settings
+  programs = {
+    # Bash shell with custom aliases
+    bash = {
+      enable = true;
+      shellAliases = myAliases;
+    };
 
-#     carapace = {
-#       enable = true;
-#       enableNushellIntegration = true;
-#     };
+    # Zsh shell with custom aliases
+    zsh = {
+      enable = true;
+      shellAliases = myAliases;
+    };
 
-#     starship = {
-#       enable = true;
-#       settings = {
-#         add_newline = true;
-#         character = {
-#           success_symbol = "[➜](bold green)";
-#           error_symbol = "[➜](bold red)";
-#         };
-#       };
-#     };
-#   };
+    # Git configuration with user details
+    git = {
+      enable = true;
+      userName = "PWoodlock";
+      userEmail = "patrick@devsec.ie";
+      extraConfig = {
+        init.defaultBranch = "main";
+      };
+    };
 
-  bash = {
-    enable = true;
-    shellAliases = myAliases;
-  };
+    # Additional programs and their configurations
+    yazi = { enable = true; };
 
+    oh-my-posh = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
 
-  zsh = {
-    enable = true;
-    shellAliases = myAliases;
-  };
+    nushell = {
+      enable = true;
+      # The `config.nu` is managed via `home.file`, so no need to specify `configFile.source` here
+      extraConfig = ''
+        let carapace_completer = {|spans|
+          carapace $spans.0 nushell $spans | from json
+        }
+        $env.config = {
+          show_banner: false,
+          completions: {
+            case_sensitive: false
+            quick: true
+            partial: true
+            algorithm: "fuzzy"
+            external: {
+              enable: true
+              max_results: 100
+              completer: $carapace_completer
+            }
+          }
+        }
+        $env.PATH = ($env.PATH | split row (char esep) | prepend /home/nixos-lenovo/.apps | append /usr/bin/env)
+      '';
+      shellAliases = {
+        vi = "hx";
+        vim = "hx";
+        nano = "hx";
+      };
+    };
 
-  git = {
-    enable = true;
-    userName = "PWoodlock";
-    userEmail = "patrick@devsec.ie";
-    extraConfig = {
-      init.defaultBranch = "main";
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+
+    starship = {
+      enable = true;
+      settings = {
+        add_newline = true;
+        character = {
+          success_symbol = "[➜](bold green)";
+          error_symbol = "[➜](bold red)";
+        };
+      };
     };
   };
 
-  yazi = { enable = true; };
-  oh-my-posh = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-  };
-
-  # Services
+  # Configure services
   services.nextcloud-client = {
     startInBackground = true;
     enable = true;
   };
 
-  # Enable Home Manager
+  # Enable Home Manager itself as a program
   programs.home-manager.enable = true;
 }
