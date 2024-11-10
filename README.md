@@ -1,7 +1,12 @@
 # NixOS
 Configuration files for NIXOS , Flakes, Home-Manager, Modules, Packages etc..
 
-Daily Driver, Server, Cloud, configurations
+The following
+
+**Daily Driver
+**Lenovo Athy
+**RISC-V Embedded SOC
+**ARM Embedded SOC
 
 https://nixos.org/
 

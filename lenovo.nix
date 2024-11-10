@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  # Define custom shell aliases for convenience
   myAliases = {
     ll = "ls -l";
     ".." = "cd ..";
@@ -9,13 +8,12 @@ let
 in
 
 {
-  # Set basic user and system configuration
   home.username = "nixos-lenovo";
   home.homeDirectory = "/home/nixos-lenovo";
   nixpkgs.config.allowUnfree = true;
   home.stateVersion = "24.05";
 
-  # Define packages to be installed in the user environment
+  # Packages
   home.packages = [
     pkgs.oh-my-posh
     pkgs.waveterm
@@ -29,32 +27,28 @@ in
     pkgs.vscode
   ];
 
-  # Manage dotfiles
-  home.file = {
-    # Link the Nushell configuration file
-    ".config/nushell/config.nu".source = ./config.nu;
-  };
+  # Manage .config/nushell/config.nu using home.file
+#  home.file = {
+#    ".config/nushell/config.nu".source = ./config.nu;
+#  };
 
-  # Set session-wide environment variables (customize if needed)
+  # Environment Variables
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
 
-  # Configure shell programs and related settings
+  # Programs Configuration
   programs = {
-    # Bash shell with custom aliases
     bash = {
       enable = true;
       shellAliases = myAliases;
     };
 
-    # Zsh shell with custom aliases
     zsh = {
       enable = true;
       shellAliases = myAliases;
     };
 
-    # Git configuration with user details
     git = {
       enable = true;
       userName = "PWoodlock";
@@ -64,7 +58,6 @@ in
       };
     };
 
-    # Additional programs and their configurations
     yazi = { enable = true; };
 
     oh-my-posh = {
@@ -75,7 +68,6 @@ in
 
     nushell = {
       enable = true;
-      # The `config.nu` is managed via `home.file`, so no need to specify `configFile.source` here
       extraConfig = ''
         let carapace_completer = {|spans|
           carapace $spans.0 nushell $spans | from json
@@ -120,12 +112,13 @@ in
     };
   };
 
-  # Configure services
+  # Services
   services.nextcloud-client = {
     startInBackground = true;
     enable = true;
   };
 
-  # Enable Home Manager itself as a program
+  # Enable Home Manager
   programs.home-manager.enable = true;
+
 }
