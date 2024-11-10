@@ -96,6 +96,7 @@
 
     packages = with pkgs; [
     thunderbird
+    vscode
     #INSERT YOUR USER PACKAGES HERE
     
     ];
