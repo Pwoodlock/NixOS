@@ -127,16 +127,6 @@ in
       init.defaultBranch = "main";
     };
 
-# adding user to permissions for dialout for USB programing and debug
-  users.users.nixos-lenovo = {
-    isNormalUser = true;
-    extraGroups = [ "dialout" ];
-    };
-
-
-
-  };
-
   #******** Services & Programs Section
   #programs.vscode.enable = true;
   programs.yazi.enable = true;

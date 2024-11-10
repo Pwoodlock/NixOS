@@ -85,7 +85,8 @@
   users.users.nixos-lenovo = {
     isNormalUser = true;
     description = "Patrick Woodlock";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" ];
+
     packages = with pkgs; [
     thunderbird
     #INSERT YOUR USER PACKAGES HERE
@@ -124,6 +125,9 @@
     vscode
     platformio
     esptool
+    esptool-ck
+    
+
     
   ];
 
@@ -155,11 +159,11 @@
   system.stateVersion = "24.05"; # Did you read the comment?
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
-  
+
+
   programs.thunderbird.enable = true;
   services.netbird.enable = true;
   programs.appimage.enable = true;
-  #programs.vscode.enabe = true;
   
 
 
