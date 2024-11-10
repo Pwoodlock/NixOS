@@ -126,6 +126,15 @@ in
     extraConfig = {
       init.defaultBranch = "main";
     };
+
+# adding user to permissions for dialout for USB programing and debug
+  users.users.nixos-lenovo = {
+    isNormalUser = true;
+    extraGroups = [ "dialout" ];
+    };
+
+
+
   };
 
   #******** Services & Programs Section
