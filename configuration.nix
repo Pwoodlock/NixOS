@@ -127,6 +127,9 @@
     pkgs.netbird
     pkgs.netbird-ui
     zsh
+    kdePackages.karousel
+    vmware-workstation
+
 
 
     
@@ -165,7 +168,15 @@
   programs.thunderbird.enable = true;
   services.netbird.enable = true;
   programs.appimage.enable = true;
-  
+
+
+
+  # VMware Workstation criteria
+  virtualisation.vmware.host.enable = true;
+  boot.kernelModules = [
+  "vmmon"  # VMware Monitor
+  "vmnet"  # VMware Network
+];
 
 
   #**** Environment Shells 
