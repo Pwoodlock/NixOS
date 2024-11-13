@@ -17,7 +17,6 @@ in
   home.packages = [
     pkgs.oh-my-posh
     pkgs.waveterm
-    pkgs.microsoft-edge
     pkgs.ungoogled-chromium
     pkgs.lutris
     pkgs.nextcloud-client
@@ -25,6 +24,8 @@ in
     pkgs.starship
     pkgs.carapace
     pkgs.vscode
+    pkgs.discord
+    pkgs.libreoffice
   ];
 
   # Manage .config/nushell/config.nu using home.file

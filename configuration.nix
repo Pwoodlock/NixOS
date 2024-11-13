@@ -96,8 +96,8 @@
 
     packages = with pkgs; [
     thunderbird
-    vscode
-    #INSERT YOUR USER PACKAGES HERE
+    microsoft-edge
+
     
     ];
   };
@@ -128,7 +128,10 @@
     pkgs.netbird-ui
     zsh
     kdePackages.karousel
+    libsForQt5.kdeconnect-kde
+    kdePackages.kdeconnect-kde
     vmware-workstation
+    open-vm-tools
 
 
 
@@ -161,14 +164,19 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
+
+  # Enable Flakes on NixOS
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
-
-
+  # **************************************************************
   programs.thunderbird.enable = true;
   services.netbird.enable = true;
   programs.appimage.enable = true;
 
+  #**** Environment Shells 
+  environment.shells = with pkgs; [ zsh ];
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
   # VMware Workstation criteria
@@ -176,14 +184,7 @@
   boot.kernelModules = [
   "vmmon"  # VMware Monitor
   "vmnet"  # VMware Network
-];
-
-
-  #**** Environment Shells 
-  environment.shells = with pkgs; [ zsh ];
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
-
-
+  ];
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 }
