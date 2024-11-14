@@ -97,6 +97,7 @@
     packages = with pkgs; [
     thunderbird
     microsoft-edge
+    nextcloud-client
 
     
     ];
@@ -130,6 +131,7 @@
     kdePackages.karousel
     libsForQt5.kdeconnect-kde
     kdePackages.kdeconnect-kde
+
     vmware-workstation
     open-vm-tools
 
@@ -177,6 +179,10 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
   #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  ################################################################
+  #       NEXTCLOUD SERVICES
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
   # VMware Workstation criteria

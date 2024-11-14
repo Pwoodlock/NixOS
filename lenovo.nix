@@ -19,7 +19,6 @@ in
     pkgs.waveterm
     pkgs.ungoogled-chromium
     pkgs.lutris
-    pkgs.nextcloud-client
     pkgs.nushell
     pkgs.starship
     pkgs.carapace
@@ -114,10 +113,7 @@ in
   };
 
   # Services
-  services.nextcloud-client = {
-    startInBackground = true;
-    enable = true;
-  };
+
 
   # Enable Home Manager
   programs.home-manager.enable = true;
