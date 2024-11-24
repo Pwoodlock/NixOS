@@ -1,5 +1,7 @@
 #!/bin/bash
-# Clean up NixOS system and Home-Manager
+
+
+# Let's Clean up NixOS system and Home-Manager redundant packages and Garbage.
 
 # Expire old generations for home-manager
 home-manager expire-generations "-30 days"
