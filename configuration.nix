@@ -128,16 +128,8 @@
     pkgs.netbird
     pkgs.netbird-ui
     zsh
-    kdePackages.karousel
-    libsForQt5.kdeconnect-kde
-    kdePackages.kdeconnect-kde
-
     vmware-workstation
-    open-vm-tools
-
-
-
-    
+    open-vm-tools    
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -185,6 +177,8 @@
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+
+  
   # VMware Workstation criteria
   virtualisation.vmware.host.enable = true;
   boot.kernelModules = [
