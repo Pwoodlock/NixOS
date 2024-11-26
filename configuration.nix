@@ -129,7 +129,9 @@
     pkgs.netbird-ui
     zsh
     vmware-workstation
-    open-vm-tools    
+    open-vm-tools
+    angryipscanner
+    appimage-run    
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
