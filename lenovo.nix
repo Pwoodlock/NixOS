@@ -25,6 +25,13 @@ in
     pkgs.vscode
     pkgs.discord
     pkgs.libreoffice
+    pkgs.unetbootin
+    pkgs.woeusb
+    pkgs.angryipscanner
+    pkgs.protonmail-bridge
+    pkgs.protonmail-bridge-gui
+    pkgs.python312Packages.python-hpilo
+
   ];
 
   # Manage .config/nushell/config.nu using home.file

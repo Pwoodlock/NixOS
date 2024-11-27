@@ -129,8 +129,7 @@
     pkgs.netbird-ui
     zsh
     vmware-workstation
-    open-vm-tools
-    angryipscanner
+    open-vm-tool
     appimage-run    
   ];
 
