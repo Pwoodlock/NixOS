@@ -28,9 +28,8 @@ in
     pkgs.unetbootin
     pkgs.woeusb
     pkgs.angryipscanner
-    pkgs.protonmail-bridge
-    pkgs.protonmail-bridge-gui
     pkgs.python312Packages.python-hpilo
+    pkgs.obsidian
 
   ];
 

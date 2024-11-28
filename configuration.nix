@@ -129,8 +129,12 @@
     pkgs.netbird-ui
     zsh
     vmware-workstation
-    open-vm-tool
-    appimage-run    
+    open-vm-tools
+    appimage-run  
+    protonmail-bridge
+    protonmail-bridge-gui
+    gparted
+    pkgs.kdePackages.full
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
