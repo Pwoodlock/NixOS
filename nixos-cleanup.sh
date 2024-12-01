@@ -1,6 +1,7 @@
 #!/bin/bash
 sudo nix flake update
 sudo nixos-rebuild switch --flake .#
+echo $USER
 home-manager switch --flake .#$USER
 
 # Let's Clean up NixOS system and Home-Manager redundant packages and Garbage.
