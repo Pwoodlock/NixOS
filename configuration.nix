@@ -122,19 +122,15 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    wget
     git
     curl
     htop
-    pkgs.netbird
-    pkgs.netbird-ui
     zsh
+    kdePackages.karousel
     vmware-workstation
     open-vm-tools
-    appimage-run  
-    protonmail-bridge
-    protonmail-bridge-gui
-    gparted
-    pkgs.kdePackages.full
+    kdePackages.full   
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -172,16 +168,10 @@
   programs.appimage.enable = true;
 
   #**** Environment Shells 
-  environment.shells = with pkgs; [ zsh ];
+  environment.shells = with pkgs; [ zsh nushell ];
+  users.defaultUserShell = pkgs.nushell;
   programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
   #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-  ################################################################
-  #       NEXTCLOUD SERVICES
-  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
 
   
   # VMware Workstation criteria

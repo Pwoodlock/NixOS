@@ -14,47 +14,97 @@ in
   home.stateVersion = "24.05";
 
   # Packages
+  # Packages to install in the user's environment
   home.packages = [
+
+    #     Terminal Related Applications
+
     pkgs.oh-my-posh
     pkgs.waveterm
-    pkgs.ungoogled-chromium
-    pkgs.lutris
     pkgs.nushell
     pkgs.starship
     pkgs.carapace
+    pkgs.pinentry-qt
+    pkgs.warp-terminal
+
+
+    #     Browsers
+
+    pkgs.microsoft-edge
+    pkgs.ungoogled-chromium
+    
+    #     Wine Based Tools
+    pkgs.lutris
+    pkgs.protonup-qt
+
+    #     Storage Provider API and Clients
+    pkgs.nextcloud-client
+
+
+    #****************************************
+    #       Dev Tools etc.
     pkgs.vscode
+    pkgs.vscode-extensions.github.copilot
+    pkgs.terraform
+    pkgs.packer
+    pkgs.jq
+
+    #****************************************
     pkgs.discord
-    pkgs.libreoffice
-    pkgs.unetbootin
-    pkgs.woeusb
+    pkgs.openscad
     pkgs.angryipscanner
-    pkgs.python312Packages.python-hpilo
+    pkgs.unetbootin
+    pkgs.freecad
+
+
+    pkgs.gparted
+    
+    pkgs.appimage-run
+    pkgs.netbird
+    pkgs.netbird-ui
     pkgs.obsidian
+
+
 
   ];
 
-  # Manage .config/nushell/config.nu using home.file
-#  home.file = {
-#    ".config/nushell/config.nu".source = ./config.nu;
-#  };
+  # Manage user files (optional section)
+  home.file = {
+    # Example of managing dotfiles (e.g. .screenrc)
+    # ".screenrc".source = dotfiles/screenrc;
+    # ".gradle/gradle.properties".text = ''
+    #   org.gradle.console=verbose
+    #   org.gradle.daemon.idletimeout=3600000
+    # '';
+  };
 
-  # Environment Variables
+  # Manage environment variables
   home.sessionVariables = {
+    # Example environment variable configuration
     # EDITOR = "emacs";
   };
 
-  # Programs Configuration
+######################################################
+#
+#              Programs Configuration
+
+
+
+
   programs = {
+    # Bash shell configuration
     bash = {
       enable = true;
       shellAliases = myAliases;
     };
 
+    # Zsh shell configuration
     zsh = {
       enable = true;
       shellAliases = myAliases;
     };
 
+    # Git configuration
     git = {
       enable = true;
       userName = "PWoodlock";
@@ -64,14 +114,7 @@ in
       };
     };
 
-    yazi = { enable = true; };
-
-    oh-my-posh = {
-      enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-    };
-
+    # Nushell configuration
     nushell = {
       enable = true;
       extraConfig = ''
@@ -95,33 +138,70 @@ in
         $env.PATH = ($env.PATH | split row (char esep) | prepend /home/nixos-lenovo/.apps | append /usr/bin/env)
       '';
       shellAliases = {
-        vi = "hx";
-        vim = "hx";
+        vi   = "hx";
+        vim  = "hx";
         nano = "hx";
       };
     };
 
+    # Carapace configuration
     carapace = {
       enable = true;
       enableNushellIntegration = true;
     };
 
+    # Starship configuration
     starship = {
       enable = true;
       settings = {
         add_newline = true;
         character = {
           success_symbol = "[➜](bold green)";
-          error_symbol = "[➜](bold red)";
+          error_symbol   = "[➜](bold red)";
         };
       };
     };
+
+    # GPG configuration
+    gpg = {
+      enable = true;
+      package = pkgs.gnupg;
+      settings = {
+        trust-model = "tofu+pgp";
+      };
+    };
+
+
+    # VS Code configuration
+    vscode = {
+      enable = true;
+    };
+
+    # Oh My Posh configuration
+    oh-my-posh = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
+
+    # Home Manager itself
+    home-manager = {
+      enable = true;
+    };
   };
 
-  # Services
+
+#####################################################
+#
+#              Services Configuration
 
 
-  # Enable Home Manager
-  programs.home-manager.enable = true;
-
+ services = {
+    gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      pinentryPackage = pkgs.pinentry-qt; # Instead of pinentryFlavor
+      enableExtraSocket = true;
+    };
+  };
 }
