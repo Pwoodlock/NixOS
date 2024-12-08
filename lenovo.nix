@@ -11,7 +11,7 @@ in
   home.username = "nixos-lenovo";
   home.homeDirectory = "/home/nixos-lenovo";
   nixpkgs.config.allowUnfree = true;
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   # Packages
   # Packages to install in the user's environment
@@ -20,7 +20,6 @@ in
     #     Terminal Related Applications
 
     pkgs.oh-my-posh
-    pkgs.waveterm
     pkgs.nushell
     pkgs.starship
     pkgs.carapace
@@ -48,6 +47,7 @@ in
     pkgs.terraform
     pkgs.packer
     pkgs.jq
+    pkgs.neovim-qt
 
     #****************************************
     pkgs.discord
@@ -55,6 +55,8 @@ in
     pkgs.angryipscanner
     pkgs.unetbootin
     pkgs.freecad
+    pkgs.libreoffice
+    pkgs.virt-viewer
 
 
     pkgs.gparted
