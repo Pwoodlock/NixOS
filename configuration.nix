@@ -95,7 +95,7 @@
     extraGroups = [ "networkmanager" "wheel" "dialout" ];
 
     packages = with pkgs; [
-    thunderbird
+    thunderbird-latest
     microsoft-edge
     nextcloud-client
 
