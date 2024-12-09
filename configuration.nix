@@ -95,16 +95,17 @@
     extraGroups = [ "networkmanager" "wheel" "dialout" ];
 
     packages = with pkgs; [
-    thunderbird-latest
+    thunderbird-bin
     microsoft-edge
     nextcloud-client
+
 
     
     ];
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
+  services.xserver.displayManager.autoLogin.enable = false;
   services.xserver.displayManager.autoLogin.user = "nixos-lenovo";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
@@ -130,7 +131,7 @@
     kdePackages.karousel
     vmware-workstation
     open-vm-tools
-    kdePackages.full   
+    kdePackages.full 
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -168,9 +169,9 @@
   programs.appimage.enable = true;
 
   #**** Environment Shells 
-  environment.shells = with pkgs; [ zsh nushell ];
+  environment.shells = with pkgs; [ nushell ];
   users.defaultUserShell = pkgs.nushell;
-  programs.zsh.enable = true;
+  programs.zsh.enable = false;
   #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   

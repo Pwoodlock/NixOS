@@ -24,7 +24,6 @@ in
     pkgs.starship
     pkgs.carapace
     pkgs.pinentry-qt
-    pkgs.warp-terminal
 
 
     #     Browsers
@@ -181,9 +180,9 @@ in
 
     # Oh My Posh configuration
     oh-my-posh = {
-      enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
+      enable = false;
+      enableZshIntegration = false;
+      enableBashIntegration = false;
     };
 
     # Home Manager itself
