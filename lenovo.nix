@@ -24,6 +24,7 @@ in
     pkgs.starship
     pkgs.carapace
     pkgs.pinentry-qt
+    pkgs.xpipe
 
 
     #     Browsers
@@ -40,13 +41,18 @@ in
 
 
     #****************************************
-    #       Dev Tools etc.
+    #       Dev Tools etc & Packages
     pkgs.vscode
     pkgs.vscode-extensions.github.copilot
     pkgs.terraform
     pkgs.packer
-    pkgs.jq
-    pkgs.neovim-qt
+    pkgs.ansible
+    pkgs.podman
+    pkgs.kubectl
+    pkgs.helm
+    pkgs.ansible-lint
+
+
 
     #****************************************
     pkgs.discord
@@ -60,7 +66,11 @@ in
 
     pkgs.gparted
     
+    #     System Tools
     pkgs.appimage-run
+
+
+    #     User Applications
     pkgs.netbird
     pkgs.netbird-ui
     pkgs.obsidian
@@ -105,6 +115,8 @@ in
       shellAliases = myAliases;
     };
 
+
+
     # Git configuration
     git = {
       enable = true;
@@ -142,6 +154,8 @@ in
         vi   = "hx";
         vim  = "hx";
         nano = "hx";
+        htop = "hx";
+        
       };
     };
 
