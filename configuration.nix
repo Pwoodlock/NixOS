@@ -132,6 +132,8 @@
     vmware-workstation
     open-vm-tools
     kdePackages.full 
+    kdePackages.discover
+    kdePackages.plasma-workspace-wallpapers
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -165,8 +167,10 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # **************************************************************
   programs.thunderbird.enable = true;
+  programs.kdeconnect.enable = true;
   services.netbird.enable = true;
   programs.appimage.enable = true;
+  services.flatpak.enable = true;
 
   #**** Environment Shells 
   environment.shells = with pkgs; [ nushell ];

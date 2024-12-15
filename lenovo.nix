@@ -19,12 +19,11 @@ in
 
     #     Terminal Related Applications
 
-    pkgs.oh-my-posh
+#    pkgs.oh-my-posh
     pkgs.nushell
     pkgs.starship
     pkgs.carapace
     pkgs.pinentry-qt
-    pkgs.xpipe
 
 
     #     Browsers
@@ -37,7 +36,7 @@ in
     pkgs.protonup-qt
 
     #     Storage Provider API and Clients
-    pkgs.nextcloud-client
+
 
 
     #****************************************
@@ -51,10 +50,20 @@ in
     pkgs.kubectl
     pkgs.helm
     pkgs.ansible-lint
+    pkgs.python313
+    
 
 
 
-    #****************************************
+    
+    #     System Tools
+    pkgs.appimage-run
+    pkgs.gparted
+
+    #     $USER Applications
+    pkgs.netbird
+    pkgs.netbird-ui
+    pkgs.obsidian
     pkgs.discord
     pkgs.openscad
     pkgs.angryipscanner
@@ -62,19 +71,7 @@ in
     pkgs.freecad
     pkgs.libreoffice
     pkgs.virt-viewer
-
-
-    pkgs.gparted
-    
-    #     System Tools
-    pkgs.appimage-run
-
-
-    #     User Applications
-    pkgs.netbird
-    pkgs.netbird-ui
-    pkgs.obsidian
-
+    pkgs.nextcloud-client
 
 
   ];
@@ -105,12 +102,6 @@ in
   programs = {
     # Bash shell configuration
     bash = {
-      enable = true;
-      shellAliases = myAliases;
-    };
-
-    # Zsh shell configuration
-    zsh = {
       enable = true;
       shellAliases = myAliases;
     };
@@ -190,13 +181,6 @@ in
     # VS Code configuration
     vscode = {
       enable = true;
-    };
-
-    # Oh My Posh configuration
-    oh-my-posh = {
-      enable = false;
-      enableZshIntegration = false;
-      enableBashIntegration = false;
     };
 
     # Home Manager itself
